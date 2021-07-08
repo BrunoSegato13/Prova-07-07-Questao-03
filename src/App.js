@@ -1,22 +1,29 @@
-import logo from './logo.svg';
+import { useEffect, useState } from 'react';
 import './App.css';
+import api from "./services/api"
+
 
 function App() {
+
+  const [user, setUser] = useState();
+  
+
+  useEffect(()=>{
+    api.get("users/BrunoSegato13")
+    .then((response) => setUser(response.data))
+    .catch((error) => {console.log(error)})
+  }, []);
+
+  console.log("User name:", user.login);
+  console.log("User bio:", user.bio);
+  console.log("Qtd de Repos", user.public_repos);
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          Prova Questão 3
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
       </header>
     </div>
   );
